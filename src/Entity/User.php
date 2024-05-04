@@ -53,9 +53,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $profilePicture = null;
 
+    /**
+     * @var Collection<int, Conversation>
+     */
+    #[ORM\OneToMany(targetEntity: Conversation::class, mappedBy: 'user1')]
+    private Collection $conversations;
+
+    /**
+     * @var Collection<int, Message>
+     */
+
     public function __construct()
     {
         $this->superPowers = new ArrayCollection();
+        $this->conversations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -210,4 +221,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Conversation>
+     */
+    public function getConversations(): Collection
+    {
+        return $this->conversations;
+    }
+
+    public function addConversation(Conversation $conversation): static
+    {
+        if (!$this->conversations->contains($conversation)) {
+            $this->conversations->add($conversation);
+            $conversation->setUser1($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConversation(Conversation $conversation): static
+    {
+        if ($this->conversations->removeElement($conversation)) {
+            // set the owning side to null (unless already changed)
+            if ($conversation->getUser1() === $this) {
+                $conversation->setUser1(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+
 }

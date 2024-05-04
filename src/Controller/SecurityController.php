@@ -26,7 +26,7 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
-    #[Route(path: '/creer-un-compte', name: 'app_user_new')]
+    #[Route(path: '/inscription', name: 'app_user_new')]
     public function newUser(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         // Vérifier si le formulaire a été soumis et que les champs requis sont remplis
@@ -47,6 +47,7 @@ class SecurityController extends AbstractController
             $user = new User();
             $lastName = $request->request->get('lastname');
             $firstName = $request->request->get('firstname');
+            $birthdate = $request->request->get('birthdate');
             $email = $request->request->get('email');
             $password = $request->request->get('password');
             $hashpassword = $passwordHasher->hashPassword($user ,$password);
@@ -54,6 +55,7 @@ class SecurityController extends AbstractController
             $user->setEmail($email);
             $user->setLastName($lastName);
             $user->setFirstName($firstName);
+            $user->setFirstName($birthdate);
             $user->setPassword($hashpassword);
             $entityManager->persist($user);
             $entityManager->flush();
