@@ -18,7 +18,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
       <path value="$PROJECT_DIR$/vendor/phpstan/phpdoc-parser" />
       <path value="$PROJECT_DIR$/vendor/symfony/notifier" />
-      <path value="$PROJECT_DIR$/vendor/symfony/ux-turbo" />
       <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
       <path value="$PROJECT_DIR$/vendor/symfony/messenger" />
       <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
@@ -117,7 +116,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/stimulus-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/finder" />
       <path value="$PROJECT_DIR$/vendor/symfony/web-link" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation" />
