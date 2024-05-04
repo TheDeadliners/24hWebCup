@@ -1,0 +1,216 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boite de réception{% endblock %}
+
+{% block body %}
+<div>
+    <section class=" flex items-center mt-8">
+        <div class="max-w-screen-xl px-4 mx-auto lg:px-12 w-full">
+            <!-- Start coding here -->
+            <div class="relative bg-white shadow-md sm:rounded-lg">
+                <div class="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+                    <div class="w-full md:w-1/2">
+                        <form class="flex items-center">
+                            <label for="simple-search" class="sr-only">Search</label>
+                            <div class="relative w-full">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 " fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <input type="text" id="simple-search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500" placeholder="Rechercher" required="">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+                        <button type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 focus:outline-none">
+                            <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                            </svg>
+                            Effacer les filtres
+                        </button>
+                        <div class="flex items-center w-full space-x-3 md:w-auto">
+                            <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown" class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200" type="button">
+                                <svg class="-ml-1 mr-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                                </svg>
+                                Actions
+                            </button>
+                            <div id="actionsDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 ">
+                                <ul class="py-1 text-sm text-gray-700 " aria-labelledby="actionsDropdownButton">
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Mass Edit</a>
+                                    </li>
+                                </ul>
+                                <div class="py-1">
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Delete all</a>
+                                </div>
+                            </div>
+                            <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-4 h-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
+                                </svg>
+                                Filter
+                                <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                                </svg>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div id="filterDropdown" class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow ">
+                                <h6 class="mb-3 text-sm font-medium text-gray-900 ">
+                                    Category
+                                </h6>
+                                <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                                    <li class="flex items-center">
+                                        <input id="apple" type="checkbox" value=""
+                                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500  focus:ring-2" />
+                                        <label for="apple" class="ml-2 text-sm font-medium text-gray-900 ">
+                                            Apple (56)
+                                        </label>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <input id="fitbit" type="checkbox" value=""
+                                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500  focus:ring-2 " />
+                                        <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 ">
+                                            Fitbit (56)
+                                        </label>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <input id="dell" type="checkbox" value=""
+                                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500  focus:ring-2  " />
+                                        <label for="dell" class="ml-2 text-sm font-medium text-gray-900 ">
+                                            Dell (56)
+                                        </label>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <input id="asus" type="checkbox" value="" checked
+                                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500  0 focus:ring-2 " />
+                                        <label for="asus" class="ml-2 text-sm font-medium text-gray-900 ">
+                                            Asus (97)
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white py-8 antialiased  md:py-16">
+        <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+            <div class="flex items-center place-content-center gap-2">
+                <h2 class="text-3xl font-semibold text-gray-900 ">Conversations</h2>
+
+            </div>
+
+
+
+
+            <div class="mt-6 divide-y divide-gray-200 ">
+                <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700">
+
+                <div class="gap-3 pb-6 sm:flex sm:items-start">
+                    <div class="shrink-0 space-y-2 sm:w-48 md:w-72">
+
+                        <div class="space-y-0.5">
+                            <p class="text-base font-semibold text-gray-900 ">Micheal Gough</p>
+                            <p class="text-sm font-normal text-gray-500 ">November 18 2023 at 15:35</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 min-w-0 flex-1 space-y-4 sm:mt-0">
+                        <p class="text-base font-normal text-gray-500 ">My old IMAC was from 2013. This replacement was well needed. Very fast, and the colour matches my office set up perfectly. The display is out of this world and I’m very happy with this purchase.</p>
+                        <button type="button" class="text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">Default</button>                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <button type="button" class="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 ">View more reviews</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add review modal -->
+    <div id="review-modal" tabindex="-1" aria-hidden="true" class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0 antialiased">
+        <div class="relative max-h-full w-full max-w-2xl p-4">
+            <!-- Modal content -->
+            <div class="relative rounded-lg bg-white shadow ">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between rounded-t border-b border-gray-200 p-4  md:p-5">
+                    <div>
+                        <h3 class="mb-1 text-lg font-semibold text-gray-900 ">Add a review for:</h3>
+                        <a href="#" class="font-medium text-primary-700 hover:underline ">Apple iMac 24" All-In-One Computer, Apple M1, 8GB RAM, 256GB SSD</a>
+                    </div>
+                    <button type="button" class="absolute right-5 top-5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 " data-modal-toggle="review-modal">
+                        <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <form class="p-4 md:p-5">
+                    <div class="mb-4 grid grid-cols-2 gap-4">
+                        <div class="col-span-2">
+                            <div class="flex items-center">
+                                <svg class="h-6 w-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                                <svg class="ms-2 h-6 w-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                                <svg class="ms-2 h-6 w-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                                <svg class="ms-2 h-6 w-6 text-gray-300 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                                <svg class="ms-2 h-6 w-6 text-gray-300 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                                <span class="ms-2 text-lg font-bold text-gray-900 ">3.0 out of 5</span>
+                            </div>
+                        </div>
+                        <div class="col-span-2">
+                            <label for="title" class="mb-2 block text-sm font-medium text-gray-900 ">Review title</label>
+                            <input type="text" name="title" id="title" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 " required="" />
+                        </div>
+                        <div class="col-span-2">
+                            <label for="description" class="mb-2 block text-sm font-medium text-gray-900 ">Review description</label>
+                            <textarea id="description" rows="6" class="mb-2 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" required=""></textarea>
+                            <p class="ms-auto text-xs text-gray-500 ">Problems with the product or delivery? <a href="#" class="text-primary-600 hover:underline">Send a report</a>.</p>
+                        </div>
+                        <div class="col-span-2">
+                            <p class="mb-2 block text-sm font-medium text-gray-900 ">Add real photos of the product to help other customers <span class="text-gray-500 ">(Optional)</span></p>
+                            <div class="flex w-full items-center justify-center">
+                                <label for="dropzone-file" class=" flex h-52 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 ">
+                                    <div class="flex flex-col items-center justify-center pb-6 pt-5">
+                                        <svg class="mb-4 h-8 w-8 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                        </svg>
+                                        <p class="mb-2 text-sm text-gray-500 "><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                        <p class="text-xs text-gray-500 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                    </div>
+                                    <input id="dropzone-file" type="file" class="hidden" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-span-2">
+                            <div class="flex items-center">
+                                <input id="review-checkbox" type="checkbox" value="" class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 " />
+                                <label for="review-checkbox" class="ms-2 text-sm font-medium text-gray-500 ">By publishing this review you agree with the <a href="#" class="text-primary-600 hover:underline ">terms and conditions</a>.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4  md:pt-5">
+                        <button type="submit" class="me-2 inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 ">Add review</button>
+                        <button type="button" data-modal-toggle="review-modal" class="me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 ">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
