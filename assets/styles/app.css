@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bouton-rond {
+    @apply border border-error-500 bg-primary-400 rounded-full px-5 py-3
+}
