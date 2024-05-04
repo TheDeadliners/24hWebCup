@@ -22,7 +22,7 @@ class MarketplaceController extends AbstractController
     // public function getSinglePower(): Response
     // {
     //     // récupérer l'id de l'user selectionnner
-    //     return $this->render('marketplace/index.html.twig', [
+    //     return $this->render('marketplace/account.html.twig', [
     //         'controller_name' => 'MarketplaceController',
     //     ]);
     // }

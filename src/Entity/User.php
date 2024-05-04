@@ -53,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $profilePicture = null;
 
+    #[ORM\Column]
+    private ?bool $verified = false;
+
     /**
      * @var Collection<int, Conversation>
      */
@@ -218,6 +221,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfilePicture(?string $profilePicture): static
     {
         $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
+
+    public function isVerified(): ?bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): static
+    {
+        $this->verified = $verified;
 
         return $this;
     }

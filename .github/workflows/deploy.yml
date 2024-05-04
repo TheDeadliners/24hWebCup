@@ -24,65 +24,65 @@ jobs:
         npm install
         npm run build
 
-    - name: Deploy config to FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./config/
-        server-dir: /webcup24/config/
+    # - name: Deploy config to FTP
+    #   uses: SamKirkland/FTP-Deploy-Action@4.0.0
+    #   with:
+    #     server: ${{ secrets.FTP_SERVER }}
+    #     username: ${{ secrets.FTP_USERNAME }}
+    #     password: ${{ secrets.FTP_PASSWORD }}
+    #     local-dir: ./config/
+    #     server-dir: /webcup24/config/
 
-    - name: Deploy src to FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./src/
-        server-dir: /webcup24/src/
+    # - name: Deploy src to FTP
+    #   uses: SamKirkland/FTP-Deploy-Action@4.0.0
+    #   with:
+    #     server: ${{ secrets.FTP_SERVER }}
+    #     username: ${{ secrets.FTP_USERNAME }}
+    #     password: ${{ secrets.FTP_PASSWORD }}
+    #     local-dir: ./src/
+    #     server-dir: /webcup24/src/
 
-    - name: Deploy public to FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./public/
-        server-dir: /webcup24/public/
+    # - name: Deploy public to FTP
+    #   uses: SamKirkland/FTP-Deploy-Action@4.0.0
+    #   with:
+    #     server: ${{ secrets.FTP_SERVER }}
+    #     username: ${{ secrets.FTP_USERNAME }}
+    #     password: ${{ secrets.FTP_PASSWORD }}
+    #     local-dir: ./public/
+    #     server-dir: /webcup24/public/
 
-    - name: Deploy templates to FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./templates/
-        server-dir: /webcup24/templates/
+    # - name: Deploy templates to FTP
+    #   uses: SamKirkland/FTP-Deploy-Action@4.0.0
+    #   with:
+    #     server: ${{ secrets.FTP_SERVER }}
+    #     username: ${{ secrets.FTP_USERNAME }}
+    #     password: ${{ secrets.FTP_PASSWORD }}
+    #     local-dir: ./templates/
+    #     server-dir: /webcup24/templates/
 
-    - name: Deploy node_modules to FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./node_modules/
-        server-dir: /webcup24/node_modules/
+    # - name: Deploy node_modules to FTP
+    #   uses: SamKirkland/FTP-Deploy-Action@4.0.0
+    #   with:
+    #     server: ${{ secrets.FTP_SERVER }}
+    #     username: ${{ secrets.FTP_USERNAME }}
+    #     password: ${{ secrets.FTP_PASSWORD }}
+    #     local-dir: ./node_modules/
+    #     server-dir: /webcup24/node_modules/
 
-    - name: Deploy vendor to FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./vendor/
-        server-dir: /webcup24/vendor/
+    # - name: Deploy vendor to FTP
+    #   uses: SamKirkland/FTP-Deploy-Action@4.0.0
+    #   with:
+    #     server: ${{ secrets.FTP_SERVER }}
+    #     username: ${{ secrets.FTP_USERNAME }}
+    #     password: ${{ secrets.FTP_PASSWORD }}
+    #     local-dir: ./vendor/
+    #     server-dir: /webcup24/vendor/
 
-    - name: Push .env file to server
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        source: .env
-        target: /webcup24/.env
+    # - name: Push .env file to server
+    #   uses: appleboy/scp-action@master
+    #   with:
+    #     host: ${{ secrets.FTP_SERVER }}
+    #     username: ${{ secrets.FTP_USERNAME }}
+    #     password: ${{ secrets.FTP_PASSWORD }}
+    #     source: .env
+    #     target: /webcup24/.env
