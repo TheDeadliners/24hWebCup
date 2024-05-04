@@ -55,6 +55,8 @@ class SecurityController extends AbstractController
 
             $user->setEmail($email);
             $user->setPassword($hashpassword);
+            $user->setFirstname($request->request->get('firstname'));
+            $user->setLastname($request->request->get('lastname'));
             $entityManager->persist($user);
             $entityManager->flush();
 
