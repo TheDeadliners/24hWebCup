@@ -28,9 +28,9 @@
 
     <section class="bg-gray-50 ">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="#" class="flex items-center mb-6 text-2xl font-bold uppercase text-gray-900 ">
-                <img class="w-32" src="{{ asset('images/logo.png') }}" alt="logo">
-                Power swap
+            <a href="#" class="flex flex-col justify-center items-center mb-6 text-2xl font-bold uppercase text-gray-900 ">
+                <img class="w-28" src="{{ asset('images/logo.svg') }}" alt="logo">
+                PowerSwap™
             </a>
             {% for flash in app.flashes('success') %}
                 <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 " role="alert">
@@ -50,16 +50,16 @@
                     <form class="space-y-4 md:space-y-6" action="#">
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Votre email</label>
-                            <input type="email" id="email" value="{{ last_username }}" name="email" id="inputEmail"
+                            <input type="email" id="email" value="{{ last_username }}" name="email"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                   autocomplete="email" required autofocus>
+                                   autocomplete="email" placeholder="demo@webcup.re" required autofocus>
 
                         </div>
                         <div>
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Votre mot de
                                 passe</label>
                             <input type="password" autocomplete="current-password" name="password" id="password"
-                                   placeholder="••••••••"
+                                   placeholder="demo"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                    required="">
                         </div>

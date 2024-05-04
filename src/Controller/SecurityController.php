@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,21 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route(path: '/', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
+        if (is_null($entityManager->getRepository(User::class)->findOneBy(['email' => 'demo@webcup.re']))) {
+            $user = new User();
+            $user->setEmail('demo@webcup.re');
+            $user->setLastName('Webcup');
+            $user->setFirstName('Démo');
+            $user->setBirthdate(new DateTime('now'));
+            $user->setPassword($passwordHasher->hashPassword($user, 'demo'));
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+
          if ($this->getUser()) {
-             return $this->redirectToRoute('app_dashboard');
+             return $this->redirectToRoute('app_marketplace');
          }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -55,7 +67,7 @@ class SecurityController extends AbstractController
             $user->setEmail($email);
             $user->setLastName($lastName);
             $user->setFirstName($firstName);
-            $user->setFirstName($birthdate);
+            $user->setBirthdate($birthdate);
             $user->setPassword($hashpassword);
             $entityManager->persist($user);
             $entityManager->flush();
