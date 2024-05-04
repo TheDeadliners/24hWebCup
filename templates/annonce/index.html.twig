@@ -3,7 +3,7 @@
 {% block title %}Annonce index{% endblock %}
 
 {% block body %}
-    <h1>Annonce index</h1>
+    {# <h1>Annonce index</h1>
 
     <table class="table">
         <thead>
@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for annonce in annonces %}
+        
             <tr>
                 <td>{{ annonce.id }}</td>
                 <td>{{ annonce.description }}</td>
@@ -29,7 +29,28 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table> #}
+
+    <div class="w-1/2 px-4 mx-auto max-w-2xl overflow-auto h-[calc(100vh-6rem)]">
+            <h2 class="mb-4 text-xl font-bold text-gray-900">Mes Annonces</h2>
+            <div class="grid gap-4 grid-cols-1 sm:gap-6">
+                {% for annonce in annonces %}
+                    <div class="w-full flex gap-2.5">
+                        <div class="flex w-auto flex-col">
+                            <div class="flex justify-between items-center">
+                                {# <span class="bg-primary-100 text-primary-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-primary-500">{{ annonce.type }}</span> #}
+                                <form action="{{ path('app_delete_annonce', {'id':  annonce.id}) }}" method="post">
+                                    <input type="hidden" name="token" value="{{ csrf_token('deleteAnnonce') }}">
+                                    <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200">Supprimer</button>
+                                </form>
+                            </div>
+                            {# <p class="font-semibold mb-3"> {{ annonce.name }}</p> #}
+                            <p class="italic">{{ annonce.description|nl2br }} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci alias culpa dolore dolorum eaque explicabo ipsam iure, molestiae officia perferendis perspiciatis praesentium, quas qui tempora totam. Eaque exercitationem fuga voluptates?</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
     <a href="{{ path('app_annonce_new') }}">Create new</a>
 {% endblock %}
