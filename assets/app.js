@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 
-import { Trade } from "./pages/trade"
+import { Trade } from "./pages/Trade"
 import "./styles/app.css"
 
 const root = ReactDOM.createRoot(document.getElementById("app-root"))
