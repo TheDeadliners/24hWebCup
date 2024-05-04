@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>PowerSwap™</title>
         <link rel="shortcut icon" href="{{ asset('images/logo.svg') }}" type="image/x-icon">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -63,9 +63,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('app_superpowers') }}" class="{{ "app_superpowers" in app.current_route ? "sidebar--link--active" : "sidebar--link"}} group">
-                            <box-icon class="{{ "app_superpowers" in app.current_route ? "sidebar--active" : "sidebar--link--icon"}}" type="solid" name='hot'></box-icon>
+                        <a href="{{ path('app_superpowers') }}" class="{{ app.current_route == "app_superpowers" ? "sidebar--link--active" : "sidebar--link"}} group">
+                            <box-icon class="{{ app.current_route == "app_superpowers" ? "sidebar--active" : "sidebar--link--icon"}}" type="solid" name='hot'></box-icon>
                             <span class="ml-3">Mes pouvoirs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_superpowers_add') }}" class="{{ "app_superpowers_add" in app.current_route ? "sidebar--link--active" : "sidebar--link"}} group">
+                            <box-icon class="{{ "app_superpowers_add" in app.current_route ? "sidebar--active" : "sidebar--link--icon"}}" type="solid" name='hot'></box-icon>
+                            <span class="ml-3">Ajouter un pouvoir</span>
                         </a>
                     </li>
                 </ul>

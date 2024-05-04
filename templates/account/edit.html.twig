@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tableau de bord{% endblock %}
-
 {% block body %}
     <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900">Modifier le compte</h2>
-            <form action="{{ path('app_account_edition') }}" method="post">
+            <form action="{{ path('app_account') }}" method="post">
                 <div class="grid gap-4 grid-cols-1 md:grid-cols-6 sm:gap-6">
                     <div class="col-span-5">
                         <label class="block mb-2 text-sm font-medium" for="profilePicture">Photo de profil</label>

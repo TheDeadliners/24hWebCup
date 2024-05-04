@@ -27,49 +27,28 @@ class AccountController extends AbstractController
     public function superPowers(EntityManagerInterface $entityManager): Response
     {
         $account = $entityManager->getRepository(User::class)->find($this->getUser());
-        return $this->render('account/powers.html.twig', [
+        return $this->render('account/powers/list.html.twig', [
+            'account' => $account
+        ]);
+    }
+    #[Route('/ajouter-pouvoirs', name: 'app_superpowers_add')]
+    public function superPowersAdd(EntityManagerInterface $entityManager): Response
+    {
+        $account = $entityManager->getRepository(User::class)->find($this->getUser());
+        return $this->render('account/powers/create.html.twig', [
             'account' => $account
         ]);
     }
 
-    #[Route('/editer-compte', name: 'app_account_edition')]
-    public function accountEdition(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/modifier-pouvoir', name: 'app_power_edition')]
+    public function superPowersEdition(SuperPower $superPower): Response
     {
-        $token = $request->request->get('token');
-        $user = $entityManager->getRepository(User::class)->find($this->getUser());
-        $data = $request->request;
-
-        if ($this->isCsrfTokenValid('editAccount', $token)) {
-            if ($passwordHasher->isPasswordValid($user, $data->get('currentPassword'))) {
-                $user
-                    ->setFirstName($data->get('firstname'))
-                    ->setLastName($data->get('lastname'))
-                ;
-
-                if ($data->get('profilePicture') != ""){
-                    $user->setProfilePicture($data->get('profilePicture'));
-                };
-
-                if ($data->get('newPassword1') != "" && $data->get('newPassword2') != ""){
-                    if ($data->get('newPassword1') == $data->get('newPassword2')) {
-                        $user->setPassword($data->get('newPassword1'));
-                    } else {
-                        $this->addFlash('fail', 'Les nouveaux mot de passe ne correspondent pas');
-                    }
-                };
-
-                $entityManager->persist($user);
-                $entityManager->flush();
-                $this->addFlash('success', 'Compte mis à jour');
-            } else {
-                $this->addFlash('fail', 'Votre mot de passe est incorrect');
-            }
-        }
-
-        return $this->redirectToRoute('app_account');
+        return $this->render('account/powers/edit.html.twig', [
+            'power' => $superPower
+        ]);
     }
 
-    #[Route('/ajouter-pouvoir', name: 'app_account_add_power')]
+    #[Route('/ajouter-pouvoir', name: 'app_add_power')]
     public function accountAddPower(Request $request, EntityManagerInterface $entityManager): Response
     {
         $token = $request->request->get('token');
@@ -94,7 +73,28 @@ class AccountController extends AbstractController
         return $this->redirectToRoute('app_superpowers');
     }
 
-    #[Route('/{id}/retirer-pouvoir', name: 'app_account_delete_power')]
+    #[Route('/{id}/sauvegarder-pouvoir', name: 'app_save_power')]
+    public function accountEditPower(Request $request, SuperPower $superPower, EntityManagerInterface $entityManager): Response
+    {
+        $token = $request->request->get('token');
+        $data = $request->request;
+
+        if ($this->isCsrfTokenValid('editPower', $token)) {
+            $superPower
+                ->setName($data->get('ability'))
+                ->setType($data->get('type'))
+                ->setDescription($data->get('description'))
+            ;
+
+            $entityManager->persist($superPower);
+            $entityManager->flush();
+            $this->addFlash('success', 'Pouvoir modifié avec succès');
+        }
+
+        return $this->redirectToRoute('app_superpowers');
+    }
+
+    #[Route('/{id}/retirer-pouvoir', name: 'app_delete_power')]
     public function accountDeletePower(Request $request, SuperPower $superPower, EntityManagerInterface $entityManager): Response
     {
         $token = $request->request->get('token');
