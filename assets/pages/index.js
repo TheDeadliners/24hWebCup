@@ -1,1 +1,1 @@
-export { TradePage } from "./Trade"
+export { TradePage } from "./TradePage"
