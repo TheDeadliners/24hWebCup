@@ -33,6 +33,7 @@ class SecurityController extends AbstractController
     #[Route(path: '/creer-un-compte', name: 'app_user_new')]
     public function newUser(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
+        // Vérifier si le formulaire a été soumis et que les champs requis sont remplis
         if ($request->isMethod('POST')) {
             $email = $request->request->get('email');
             $password = $request->request->get('password');
@@ -40,6 +41,8 @@ class SecurityController extends AbstractController
             if (!$email || !$password) {
                 return $this->redirectToRoute('app_user_new');
             }
+
+            // Vérifier si l'utilisateur existe déjà
             $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
             if ($existingUser) {
                 $this->addFlash('fail','Un compte existe déjà');
@@ -52,6 +55,8 @@ class SecurityController extends AbstractController
 
             $user->setEmail($email);
             $user->setPassword($hashpassword);
+            $user->setFirstname($request->request->get('firstname'));
+            $user->setLastname($request->request->get('lastname'));
             $entityManager->persist($user);
             $entityManager->flush();
 
