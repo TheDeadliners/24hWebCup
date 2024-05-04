@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-.bouton-rond {
-    @apply border border-error-500 bg-primary-400 rounded-full px-5 py-3
+.sidebar--link {
+    @apply flex items-center p-2 text-base font-semibold text-gray-900 rounded-lg hover:bg-gray-100;
+}
+
+.sidebar--link--active {
+    @apply flex items-center p-2 text-base font-semibold text-primary-900 rounded-lg bg-primary-50 hover:bg-primary-100;
+}
+
+.sidebar--link--icon--active {
+    @apply fill-primary-900;
+}
+
+.sidebar--active {
+    @apply fill-primary-900;
 }
