@@ -12,7 +12,7 @@ const ModalExchangeButton = ({ toggleModal, setToggleModal }) => {
         type="button"
         onClick={() => setToggleModal(!toggleModal)}
       >
-        Show Exchange modal
+        Echange
       </button>
     </div>
   )
@@ -61,7 +61,7 @@ const ModalFooter = () => {
           className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
         >
           <svg
-            className="w-6 h-6 text-gray-800 dark:text-white"
+            className="w-6 h-6 text-gray-800 dark:text-white pr-1.5"
             fill="currentColor"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"

@@ -1,13 +1,13 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 
-import { Trade } from "./pages/Trade"
+import { TradePage } from "./pages"
 import "./styles/app.css"
 
-const root = ReactDOM.createRoot(document.getElementById("app-root"))
+const root = ReactDOM.createRoot(document.querySelector('.trade-modal'))
 
 root.render(
   <React.StrictMode>
-    <Trade />
+    <TradePage />
   </React.StrictMode>
 )

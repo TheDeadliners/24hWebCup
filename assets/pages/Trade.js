@@ -4,7 +4,7 @@ import {
   ModalExchangeButton,
 } from "../components/ui/ModalExchange"
 
-const Trade = () => {
+const TradePage = () => {
   const [toggleModal, setToggleModal] = useState(false)
   return (
     <>
@@ -23,4 +23,4 @@ const Trade = () => {
   )
 }
 
-export { Trade }
+export { TradePage }
