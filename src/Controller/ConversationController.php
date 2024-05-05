@@ -66,9 +66,8 @@ class ConversationController extends AbstractController
     {
         if ($request->isMethod('POST')) {
             $content = $request->request->get('content');
-            $emitterId = $request->request->get('emitterId');
 
-            dd($entityManager->getRepository(User::class)->find($this->getUser()));
+            dd($this->getUser());
             // Récupération de l'ID du destinataire à partir de la relation de commerce de la conversation
 //            $receiverId = ;
             // Création d'une nouvelle instance de Message
