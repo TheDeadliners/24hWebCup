@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import {
   ModalExchange,
   ModalExchangeButton,
-} from "../components/ui/ModalExchange"
+} from "../components/modals/ModalExchange"
 
 const TradePage = () => {
   const [toggleModal, setToggleModal] = useState(false)

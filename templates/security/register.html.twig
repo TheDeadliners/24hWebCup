@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Page d'inscription{% endblock %}</title>
+<<<<<<< HEAD
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+=======
+    <link rel="shortcut icon" href="{{ asset('images/logo.svg') }}" type="image/x-icon">
+>>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
@@ -16,6 +20,7 @@
 </head>
 <body>
 <form method="post">
+<<<<<<< HEAD
 {#    {% if error %}#}
 {#        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
 {#    {% endif %}#}
@@ -33,6 +38,14 @@
                 <img class="w-32" src="{{ asset('images/logo.png') }}" alt="logo">
                 Power swap
             </a>
+=======
+    <section class="bg-gray-50 py-5">
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
+            <span class="flex flex-col justify-center items-center mb-6 text-2xl font-bold uppercase text-gray-900 ">
+                <img class="w-28 animate-pulse" src="{{ asset('images/logo.svg') }}" alt="logo">
+                PowerSwap™
+            </span>
+>>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
             {% for flash in app.flashes('success') %}
                 <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
                     {{ flash|raw }}

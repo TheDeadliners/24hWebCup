@@ -1,0 +1,1 @@
+export { ModalAccept } from "./ModalAccept"

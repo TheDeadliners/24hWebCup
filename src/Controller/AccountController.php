@@ -4,28 +4,42 @@ namespace App\Controller;
 
 use App\Entity\SuperPower;
 use App\Entity\User;
+use App\Service\JwtService;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 class AccountController extends AbstractController
 {
     #[Route('/compte', name: 'app_account')]
-    public function account(EntityManagerInterface $entityManager): Response
+    public function account(Request $request, EntityManagerInterface $entityManager, JwtService $jwtService): Response
     {
         $account = $entityManager->getRepository(User::class)->find($this->getUser());
+
+        // Création du header du JWT
+        $header = [
+            'typ' => 'JWT',
+            'alg' => 'H256'
+        ];
+
+        // Création du payload du JWT
+        $payload = [
+            'uid' => $account->getId()
+        ];
+
+        // Génération du token
+        $token = $jwtService->generate($header, $payload);
+
+        setCookie('auth-token', $token);
+
         return $this->render('account/edit.html.twig', [
-            'account' => $account
-        ]);
-    }
-    #[Route('/mes-pouvoirs', name: 'app_superpowers')]
-    public function superPowers(EntityManagerInterface $entityManager): Response
-    {
-        $account = $entityManager->getRepository(User::class)->find($this->getUser());
-        return $this->render('account/powers.html.twig', [
             'account' => $account
         ]);
     }
@@ -65,10 +79,37 @@ class AccountController extends AbstractController
         }
 
         return $this->redirectToRoute('app_account');
+<<<<<<< HEAD
+=======
+    }
+    #[Route('/mes-pouvoirs', name: 'app_superpowers')]
+    public function superPowers(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $account = $entityManager->getRepository(User::class)->find($this->getUser());
+        return $this->render('account/powers/list.html.twig', [
+            'account' => $account
+        ]);
+    }
+    #[Route('/ajouter-pouvoirs', name: 'app_superpowers_create')]
+    public function superpowersCreate(EntityManagerInterface $entityManager): Response
+    {
+        $account = $entityManager->getRepository(User::class)->find($this->getUser());
+        return $this->render('account/powers/create.html.twig', [
+            'account' => $account
+        ]);
+>>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
     }
 
-    #[Route('/ajouter-pouvoir', name: 'app_account_add_power')]
-    public function accountAddPower(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/modifier-pouvoir', name: 'app_superpowers_edition')]
+    public function superPowersEdition(SuperPower $superPower): Response
+    {
+        return $this->render('account/powers/edit.html.twig', [
+            'power' => $superPower
+        ]);
+    }
+
+    #[Route('/ajouter-pouvoir', name: 'app_superpowers_save')]
+    public function accountSuperpowersSave(Request $request, EntityManagerInterface $entityManager): Response
     {
         $token = $request->request->get('token');
         $user = $entityManager->getRepository(User::class)->find($this->getUser());
@@ -92,7 +133,28 @@ class AccountController extends AbstractController
         return $this->redirectToRoute('app_superpowers');
     }
 
-    #[Route('/{id}/retirer-pouvoir', name: 'app_account_delete_power')]
+    #[Route('/{id}/sauvegarder-pouvoir', name: 'app_save_power')]
+    public function accountEditPower(Request $request, SuperPower $superPower, EntityManagerInterface $entityManager): Response
+    {
+        $token = $request->request->get('token');
+        $data = $request->request;
+
+        if ($this->isCsrfTokenValid('editPower', $token)) {
+            $superPower
+                ->setName($data->get('ability'))
+                ->setType($data->get('type'))
+                ->setDescription($data->get('description'))
+            ;
+
+            $entityManager->persist($superPower);
+            $entityManager->flush();
+            $this->addFlash('success', 'Pouvoir modifié avec succès');
+        }
+
+        return $this->redirectToRoute('app_superpowers');
+    }
+
+    #[Route('/{id}/retirer-pouvoir', name: 'app_delete_power')]
     public function accountDeletePower(Request $request, SuperPower $superPower, EntityManagerInterface $entityManager): Response
     {
         $token = $request->request->get('token');

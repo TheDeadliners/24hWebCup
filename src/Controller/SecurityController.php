@@ -15,10 +15,25 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route(path: '/', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
+        if (is_null($entityManager->getRepository(User::class)->findOneBy(['email' => 'demo@webcup.re']))) {
+            $user = new User();
+            $user->setEmail('demo@webcup.re');
+            $user->setLastName('Webcup');
+            $user->setFirstName('Démo');
+            $user->setBirthdate(new DateTime('now'));
+            $user->setPassword($passwordHasher->hashPassword($user, 'demo'));
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+
          if ($this->getUser()) {
+<<<<<<< HEAD
              return $this->redirectToRoute('app_account');
+=======
+             return $this->redirectToRoute('app_marketplace');
+>>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
          }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -48,8 +63,12 @@ class SecurityController extends AbstractController
             $user = new User();
             $lastName = $request->request->get('lastname');
             $firstName = $request->request->get('firstname');
+<<<<<<< HEAD
             $birthdateString = $request->request->get('birthdate');
             $birthdate = DateTime::createFromFormat('Y-m-d', $birthdateString);
+=======
+            $birthdate = $request->request->get('birthdate');
+>>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
             $email = $request->request->get('email');
             $password = $request->request->get('password');
             $hashpassword = $passwordHasher->hashPassword($user ,$password);

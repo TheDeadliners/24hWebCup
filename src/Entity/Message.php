@@ -27,9 +27,12 @@ class Message
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $datetime = null;
 
+<<<<<<< HEAD
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
+=======
+>>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
     public function getId(): ?int
     {
         return $this->id;
@@ -82,6 +85,7 @@ class Message
 
         return $this;
     }
+<<<<<<< HEAD
 
     public function getContent(): ?string
     {
@@ -94,4 +98,6 @@ class Message
 
         return $this;
     }
+=======
+>>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
 }
