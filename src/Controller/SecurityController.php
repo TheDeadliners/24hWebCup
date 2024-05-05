@@ -29,7 +29,11 @@ class SecurityController extends AbstractController
         }
 
          if ($this->getUser()) {
+<<<<<<< HEAD
+             return $this->redirectToRoute('app_account');
+=======
              return $this->redirectToRoute('app_marketplace');
+>>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
          }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -59,7 +63,12 @@ class SecurityController extends AbstractController
             $user = new User();
             $lastName = $request->request->get('lastname');
             $firstName = $request->request->get('firstname');
+<<<<<<< HEAD
+            $birthdateString = $request->request->get('birthdate');
+            $birthdate = DateTime::createFromFormat('Y-m-d', $birthdateString);
+=======
             $birthdate = $request->request->get('birthdate');
+>>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
             $email = $request->request->get('email');
             $password = $request->request->get('password');
             $hashpassword = $passwordHasher->hashPassword($user ,$password);

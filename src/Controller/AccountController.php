@@ -79,6 +79,8 @@ class AccountController extends AbstractController
         }
 
         return $this->redirectToRoute('app_account');
+<<<<<<< HEAD
+=======
     }
     #[Route('/mes-pouvoirs', name: 'app_superpowers')]
     public function superPowers(Request $request, EntityManagerInterface $entityManager): Response
@@ -95,6 +97,7 @@ class AccountController extends AbstractController
         return $this->render('account/powers/create.html.twig', [
             'account' => $account
         ]);
+>>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
     }
 
     #[Route('/{id}/modifier-pouvoir', name: 'app_superpowers_edition')]
