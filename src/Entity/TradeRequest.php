@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TradeRequestRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,9 +31,16 @@ class TradeRequest
     #[ORM\JoinColumn(nullable: true)]
     private ?SuperPower $power = null;
 
+    /**
+     * @var Collection<int, Conversation>
+     */
+    #[ORM\OneToMany(targetEntity: Conversation::class, mappedBy: 'Trade')]
+    private Collection $conversations;
+
     public function __construct()
     {
         $this->creationDatetime = new \DateTime('now', new \DateTimeZone('Indian/Reunion'));
+        $this->conversations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,6 +92,36 @@ class TradeRequest
     public function setPower(?SuperPower $power): static
     {
         $this->power = $power;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Conversation>
+     */
+    public function getConversations(): Collection
+    {
+        return $this->conversations;
+    }
+
+    public function addConversation(Conversation $conversation): static
+    {
+        if (!$this->conversations->contains($conversation)) {
+            $this->conversations->add($conversation);
+            $conversation->setTrade($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConversation(Conversation $conversation): static
+    {
+        if ($this->conversations->removeElement($conversation)) {
+            // set the owning side to null (unless already changed)
+            if ($conversation->getTrade() === $this) {
+                $conversation->setTrade(null);
+            }
+        }
 
         return $this;
     }

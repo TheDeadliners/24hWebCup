@@ -26,13 +26,17 @@ class Conversation
     /**
      * @var Collection<int, Message>
      */
-    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'conversation', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'conversation')]
     private Collection $messages;
+
+    #[ORM\ManyToOne(inversedBy: 'conversations')]
+    private ?TradeRequest $Trade = null;
 
     public function __construct()
     {
         $this->messages = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -92,4 +96,21 @@ class Conversation
 
         return $this;
     }
+
+    public function getTrade(): ?TradeRequest
+    {
+        return $this->Trade;
+    }
+
+    public function setTrade(?TradeRequest $Trade): static
+    {
+        $this->Trade = $Trade;
+
+        return $this;
+    }
+
+
+
+
+
 }

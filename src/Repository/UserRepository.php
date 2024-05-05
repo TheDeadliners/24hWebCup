@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Conversation;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -31,6 +33,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
+    }
+    public function getConversationsByUser(User $user): array
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('c')
+            ->from(Conversation::class, 'c')
+            ->where($qb->expr()->orX(
+                $qb->expr()->eq('c.user1', ':user'),
+                $qb->expr()->eq('c.user2', ':user')
+            ))
+            ->setParameter('user', $user);
+
+        return $qb->getQuery()->getResult();
     }
 
     //    /**

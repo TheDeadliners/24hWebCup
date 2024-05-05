@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boite de réception{% endblock %}
+
+{% block body %}
+    <div>
+        <section class="bg-white py-2 antialiased  md:py-5">
+            <div class="mx-auto max-w-screen-xl md:px-4 px-1 2xl:px-0">
+                <h2 class="text-3xl text-center font-semibold text-gray-900 mt-3">Conversations</h2>
+                <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-5 dark:bg-gray-700">
+                <div class="mt-2 divide-y divide-gray-200 flex flex-wrap w-full">
+                    {% for conversation in conversations %}
+                        <div class="md:max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow m-2 w-full">
+                            <a href="#">
+                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">{{ conversation.user1.lastName }} {{ conversation.user1.firstName }} &
+                                    {{ conversation.user2.lastName }} {{ conversation.user2.firstName }}</h5>
+                            </a>
+                            <p class="text-sm font-normal text-gray-500 ">Messages : ({{ conversation.messages|length }})</p>
+                            <p class="mb-3 font-normal text-gray-700 ">Pouvoir de l'annonce : {{ conversation.trade.power.name }}</p>
+                            <a href="{{ path('app_conversation_messages', {'id': conversation.id}) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-200 rounded-lg hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                Voir les messages
+                                <box-icon name='right-arrow-alt' color="#ffff"></box-icon>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+{% endblock %}

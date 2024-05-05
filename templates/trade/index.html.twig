@@ -17,8 +17,10 @@
                                     <p class="italic text-xs"> {{ request.author.email }}</p>
                                 </div>
                             </div>
-                            <form action="" method="post">
+                            <form action="{{ path('app_conversation_new',{'id': request.id}) }}" method="post">
                                 <input type="hidden" name="token" value="{{ csrf_token('createConveration') }}">
+                                <input type="hidden" name="author" value="{{ request.author.id }}">
+                                <input type="hidden" name="user" value="{{ app.user.id }}">
                                 <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200">Ouvrir discusion</button>
                             </form>
                         </div>
