@@ -5,7 +5,7 @@
         <div class="grid gap-4 grid-cols-2 sm:gap-6">
             {% for request in tradeRequests %}
                 {% if request.author.id != app.user.id %}
-                    <div class="flex w-full flex-col">
+                    <div class="flex col-span-2 md:col-span-1 flex-col">
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-2.5">
                                 <img src="{{ request.author.profilePicture == "" or request.author.profilePicture is null ? 'https://placehold.co/128x128?text=?' : request.author.profilePicture }}" alt="Photo de l'auteur" class="w-16 rounded-full">

@@ -28,7 +28,7 @@
                     </span>
                 </div>
                 <div class="flex items-center lg:order-2">
-                    <a href="https://bff.ecoindex.fr/redirect/?url=https://lesdeadliners.lareunion.webcup.hodi.host" target="_blank">
+                    <a class="hidden md:flex" href="https://bff.ecoindex.fr/redirect/?url=https://lesdeadliners.lareunion.webcup.hodi.host" target="_blank">
                         <img src="https://bff.ecoindex.fr/badge/?theme=light&url=https://lesdeadliners.lareunion.webcup.hodi.host" alt="Ecoindex Badge" />
                     </a>
                     <span class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
@@ -81,6 +81,11 @@
                         <a href="{{ path('app_trade_requests_create') }}" class="{{ "app_trade_requests_create" in app.current_route ? "sidebar--link--active" : "sidebar--link"}} group">
                             <box-icon class="{{ "app_trade_requests_create" in app.current_route ? "sidebar--active" : "sidebar--link--icon"}}" name='mail-send'></box-icon>
                             <span class="ml-3">Poster un échange</span>
+                        </a>
+                    </li>
+                    <li class="flex justify-center">
+                        <a href="https://bff.ecoindex.fr/redirect/?url=https://lesdeadliners.lareunion.webcup.hodi.host" target="_blank">
+                            <img src="https://bff.ecoindex.fr/badge/?theme=light&url=https://lesdeadliners.lareunion.webcup.hodi.host" alt="Ecoindex Badge" />
                         </a>
                     </li>
                 </ul>
