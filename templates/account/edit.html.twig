@@ -14,7 +14,7 @@
                         </button>
                     </div>
                     <div>
-                        <img id="profilePictureImg" src="{{ account.profilePicture }}" alt="Votre photo de profil" class="w-32 rounded-full">
+                        <img id="profilePictureImg" src="{{ account.profilePicture == "" or account.profilePicture is null ? 'https://placehold.co/128x128?text=?' : account.profilePicture }}" alt="Votre photo de profil" class="w-32 rounded-full">
                     </div>
                     <div class="col-span-6 md:col-span-3">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900">E-mail</label>

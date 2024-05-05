@@ -8,7 +8,7 @@
                     <div class="flex w-full flex-col">
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-2.5">
-                                <img src="{{ request.author.profilePicture }}" alt="Photo de l'auteur" class="w-16 rounded-full">
+                                <img src="{{ request.author.profilePicture == "" or request.author.profilePicture is null ? 'https://placehold.co/128x128?text=?' : request.author.profilePicture }}" alt="Photo de l'auteur" class="w-16 rounded-full">
                                 <div class="flex flex-col justify-center h-full-full">
                                     <div>
                                         <span class="bg-primary-100 text-primary-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-primary-500">{{ request.power.type }}</span>
