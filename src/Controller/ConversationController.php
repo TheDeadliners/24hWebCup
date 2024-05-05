@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Conversation;
 use App\Entity\Message;
 use App\Entity\TradeRequest;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Constraints\Timezone;
 
 class ConversationController extends AbstractController
 {
@@ -71,11 +73,11 @@ class ConversationController extends AbstractController
             // Création d'une nouvelle instance de Message
             $message = new Message();
             $message->setConversation($conversation);
-            $message->setEmitter($this->getUser());
+            $message->setEmitter($entityManager->getRepository(User::class)->find($emitterId));
             $message->setReceiver($conversation->getTrade()->getAuthor());
 
             $message->setContent($content);
-            $message->setDatetime(new \DateTime()); // Assurez-vous de définir la date et l'heure correctement
+            $message->setDatetime(new \DateTime('now', new Timezone('Indian/Reunion'))); // Assurez-vous de définir la date et l'heure correctement
 
             // Persistez le message dans la base de données
             $entityManager->persist($message);

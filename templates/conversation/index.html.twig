@@ -17,9 +17,8 @@
                             </a>
                             <p class="text-sm font-normal text-gray-500 ">Messages : ({{ conversation.messages|length }})</p>
                             <p class="mb-3 font-normal text-gray-700 ">Pouvoir de l'annonce : {{ conversation.trade.power.name }}</p>
-                            <a href="{{ path('app_conversation_messages', {'id': conversation.id}) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-200 rounded-lg hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                            <a href="{{ path('app_conversation_messages', {'id': conversation.id}) }}" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center bg-primary-100 text-primary-800 border-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200">
                                 Voir les messages
-                                <box-icon name='right-arrow-alt' color="#ffff"></box-icon>
                             </a>
                         </div>
                     {% endfor %}
