@@ -4,12 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Page de connexion{% endblock %}</title>
-<<<<<<< HEAD
-    <link rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-=======
     <link rel="shortcut icon" href="{{ asset('images/logo.svg') }}" type="image/x-icon">
->>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
@@ -19,25 +14,6 @@
     {% endblock %}
 </head>
 <body>
-<<<<<<< HEAD
-        <form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
-
-    <section class="bg-gray-50 ">
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="#" class="flex items-center mb-6 text-2xl font-bold uppercase text-gray-900 ">
-                <img class="w-32" src="{{ asset('images/logo.png') }}" alt="logo">
-                Power swap
-            </a>
-=======
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -48,7 +24,6 @@
                 <img class="w-28 animate-pulse" src="{{ asset('images/logo.svg') }}" alt="logo">
                 PowerSwap™
             </span>
->>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
             {% for flash in app.flashes('success') %}
                 <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 " role="alert">
                     <span class="font-medium">Succès</span> {{ flash|raw }}
@@ -67,62 +42,28 @@
                     <form class="space-y-4 md:space-y-6" action="#">
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Votre email</label>
-<<<<<<< HEAD
-                            <input type="email" id="email" value="{{ last_username }}" name="email" id="inputEmail"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                   autocomplete="email" required autofocus>
-
-                        </div>
-                        <div>
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Votre mot de
-                                passe</label>
-                            <input type="password" autocomplete="current-password" name="password" id="password"
-                                   placeholder="••••••••"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                   required="">
-=======
                             <input type="email" id="email" value="demo@webcup.re" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " autocomplete="email" placeholder="demo@webcup.re" required autofocus>
                         </div>
                         <div>
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Votre mot de passe</label>
                             <input type="password" autocomplete="current-password" name="password" id="password" placeholder="demo" value="demo" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
->>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
                         </div>
                         <input type="hidden" name="_csrf_token"
                                value="{{ csrf_token('authenticate') }}">
                         <div class="flex items-center justify-between">
                             <div class="flex items-start">
                                 <div class="flex items-center h-5">
-<<<<<<< HEAD
-                                    <input id="remember" name="_remember_me" aria-describedby="remember" type="checkbox"
-                                           class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 ">
-=======
                                     <input id="remember" name="_remember_me" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 ">
->>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
                                 </div>
                                 <div class="ml-3 text-sm">
                                     <label for="remember" class="text-gray-500 ">Se souvenir de moi</label>
                                 </div>
                             </div>
-<<<<<<< HEAD
-                            <a href="#" class="text-sm font-medium text-primary-600 hover:underline ">Mot de passe
-                                oublié?</a>
-                        </div>
-                        <button type="submit"
-                                class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  ">
-                            Se connecter
-                        </button>
-                        <p class="text-sm font-light text-gray-500 ">
-                            Vous n'avez pas encore de compte ? <a href="{{ path('app_user_new') }}"
-                                                                  class="font-medium text-primary-600 hover:underline ">Créer
-                                votre compte</a>
-=======
                             <a href="#" class="text-sm font-medium text-primary-600 hover:underline ">Mot de passe oublié?</a>
                         </div>
                         <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  ">Se connecter</button>
                         <p class="text-sm font-light text-gray-500 ">
                             Vous n'avez pas encore de compte ? <a href="{{ path('app_user_new') }}" class="font-medium text-primary-600 hover:underline ">Créer votre compte</a>
->>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
                         </p>
                     </form>
                 </div>
@@ -132,10 +73,3 @@
 </form>
 </body>
 </html>
-
-<<<<<<< HEAD
-</body>
-</html>
-
-=======
->>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
