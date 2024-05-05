@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\SuperPower;
 use App\Entity\User;
+use App\Service\JwtService;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -16,23 +19,77 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class AccountController extends AbstractController
 {
     #[Route('/compte', name: 'app_account')]
-    public function account(EntityManagerInterface $entityManager): Response
+    public function account(Request $request, EntityManagerInterface $entityManager, JwtService $jwtService): Response
     {
         $account = $entityManager->getRepository(User::class)->find($this->getUser());
+
+        // Création du header du JWT
+        $header = [
+            'typ' => 'JWT',
+            'alg' => 'H256'
+        ];
+
+        // Création du payload du JWT
+        $payload = [
+            'uid' => $account->getId()
+        ];
+
+        // Génération du token
+        $token = $jwtService->generate($header, $payload);
+
+        setCookie('auth-token', $token);
+
         return $this->render('account/edit.html.twig', [
             'account' => $account
         ]);
     }
+
+    #[Route('/editer-compte', name: 'app_account_edition')]
+    public function accountEdition(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $token = $request->request->get('token');
+        $user = $entityManager->getRepository(User::class)->find($this->getUser());
+        $data = $request->request;
+
+        if ($this->isCsrfTokenValid('editAccount', $token)) {
+            if ($passwordHasher->isPasswordValid($user, $data->get('currentPassword'))) {
+                $user
+                    ->setFirstName($data->get('firstname'))
+                    ->setLastName($data->get('lastname'))
+                ;
+
+                if ($data->get('profilePicture') != ""){
+                    $user->setProfilePicture($data->get('profilePicture'));
+                };
+
+                if ($data->get('newPassword1') != "" && $data->get('newPassword2') != ""){
+                    if ($data->get('newPassword1') == $data->get('newPassword2')) {
+                        $user->setPassword($data->get('newPassword1'));
+                    } else {
+                        $this->addFlash('fail', 'Les nouveaux mot de passe ne correspondent pas');
+                    }
+                };
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $this->addFlash('success', 'Compte mis à jour');
+            } else {
+                $this->addFlash('fail', 'Votre mot de passe est incorrect');
+            }
+        }
+
+        return $this->redirectToRoute('app_account');
+    }
     #[Route('/mes-pouvoirs', name: 'app_superpowers')]
-    public function superPowers(EntityManagerInterface $entityManager): Response
+    public function superPowers(Request $request, EntityManagerInterface $entityManager): Response
     {
         $account = $entityManager->getRepository(User::class)->find($this->getUser());
         return $this->render('account/powers/list.html.twig', [
             'account' => $account
         ]);
     }
-    #[Route('/ajouter-pouvoirs', name: 'app_superpowers_add')]
-    public function superPowersAdd(EntityManagerInterface $entityManager): Response
+    #[Route('/ajouter-pouvoirs', name: 'app_superpowers_create')]
+    public function superpowersCreate(EntityManagerInterface $entityManager): Response
     {
         $account = $entityManager->getRepository(User::class)->find($this->getUser());
         return $this->render('account/powers/create.html.twig', [
@@ -40,7 +97,7 @@ class AccountController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/modifier-pouvoir', name: 'app_power_edition')]
+    #[Route('/{id}/modifier-pouvoir', name: 'app_superpowers_edition')]
     public function superPowersEdition(SuperPower $superPower): Response
     {
         return $this->render('account/powers/edit.html.twig', [
@@ -48,8 +105,8 @@ class AccountController extends AbstractController
         ]);
     }
 
-    #[Route('/ajouter-pouvoir', name: 'app_add_power')]
-    public function accountAddPower(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/ajouter-pouvoir', name: 'app_superpowers_save')]
+    public function accountSuperpowersSave(Request $request, EntityManagerInterface $entityManager): Response
     {
         $token = $request->request->get('token');
         $user = $entityManager->getRepository(User::class)->find($this->getUser());

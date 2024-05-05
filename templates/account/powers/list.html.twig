@@ -11,7 +11,7 @@
                         <form action="{{ path('app_delete_power', {'id': power.id}) }}" method="post">
                             <input type="hidden" name="token" value="{{ csrf_token('deletePower') }}">
                             <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200">Supprimer</button>
-                            <a href="{{ path('app_power_edition', {'id': power.id}) }}" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center bg-primary-100 text-primary-800 border-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200">Modifier</a>
+                            <a href="{{ path('app_superpowers_edition', {'id': power.id}) }}" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center bg-primary-100 text-primary-800 border-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200">Modifier</a>
                         </form>
                     </div>
                     <p class="font-semibold mb-3"> {{ power.name }}</p>

@@ -19,13 +19,4 @@ class MarketplaceController extends AbstractController
             // retourne la requête vers la vue
         ]);
     }
-
-    // #[Route('/marketplace/{id}/trade', name: 'app_marketplace')]
-    // public function getSinglePower(): Response
-    // {
-    //     // récupérer l'id de l'user selectionnner
-    //     return $this->render('marketplace/account.html.twig', [
-    //         'controller_name' => 'MarketplaceController',
-    //     ]);
-    // }
 }
