@@ -4,10 +4,12 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('modalTrade') }}
+    {{ encore_entry_script_tags('marketplace') }}
 {% endblock %}
+
 {% block body %}
-<section class="bg-white dark:bg-gray-900">
+<div id="marketplace-main" />
+{# <section class="bg-white dark:bg-gray-900">
   <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
       <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
         <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
@@ -127,4 +129,5 @@
       </div>  
     </div>
 </section>
+#}
 {% endblock %}
