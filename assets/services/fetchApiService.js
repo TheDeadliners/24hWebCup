@@ -44,7 +44,7 @@ export class FetchApiService {
     return
   }
 
-  async getTradeRequests(annonce) {
+  async getTradeRequests() {
     const response = await this.fetchWithAuth(
       `${this.baseUrl}/rest/traderequests`,
       {

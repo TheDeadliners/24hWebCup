@@ -1,12 +1,43 @@
 import React from "react"
-import { TradePage } from "./TradePage" 
+import { TradePage } from "./TradePage"
+import { useApiService } from "../lib/ApiServiceContext"
+import { TraderCard } from "../components/ui/TraderCard/TraderCard"
+
+const annonces = [
+  {
+    traderName: "Carrie G",
+    traderProfilePicture:
+      "https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png",
+    traderProfilePictureAlt: "Bonnie Avatar",
+    traderAdsDescription:
+      "Vend pouvoir rayon laser, si vous voulez la jouer Superman, prix négociable, mais pas trop...",
+  },
+]
 
 const MarketplacePage = () => {
-  console.log("HERE")
+  const apiService = useApiService()
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
         <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
+          {annonces.map((annonce) => {
+            const {
+              traderName,
+              traderProfilePicture,
+              traderProfilePictureAlt,
+              traderAdsDescription,
+            } = annonce
+            console.log("EHEHEH", annonce)
+            return (
+              <TraderCard
+                traderName={traderName}
+                traderProfilePicture={traderProfilePicture}
+                traderProfilePictureAlt={traderProfilePictureAlt}
+                traderAdsDescription={traderAdsDescription}
+              />
+            )
+          })}
+          {/*
           <div className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
             <img
               className="rounded-lg sm:rounded-none sm:rounded-l-lg max-h-44"
@@ -329,6 +360,7 @@ const MarketplacePage = () => {
               </ul>
             </div>
           </div>
+              */}
         </div>
       </div>
     </section>
