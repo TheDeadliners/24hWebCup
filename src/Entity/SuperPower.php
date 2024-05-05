@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SuperPowerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,17 @@ class SuperPower
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
+
+    /**
+     * @var Collection<int, TradeRequest>
+     */
+    #[ORM\OneToMany(targetEntity: TradeRequest::class, mappedBy: 'power')]
+    private Collection $tradeRequests;
+
+    public function __construct()
+    {
+        $this->tradeRequests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +88,36 @@ class SuperPower
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TradeRequest>
+     */
+    public function getTradeRequests(): Collection
+    {
+        return $this->tradeRequests;
+    }
+
+    public function addTradeRequest(TradeRequest $tradeRequest): static
+    {
+        if (!$this->tradeRequests->contains($tradeRequest)) {
+            $this->tradeRequests->add($tradeRequest);
+            $tradeRequest->setPower($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTradeRequest(TradeRequest $tradeRequest): static
+    {
+        if ($this->tradeRequests->removeElement($tradeRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($tradeRequest->getPower() === $this) {
+                $tradeRequest->setPower(null);
+            }
+        }
 
         return $this;
     }

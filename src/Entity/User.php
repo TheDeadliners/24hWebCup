@@ -63,6 +63,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $conversations;
 
     /**
+     * @var Collection<int, TradeRequest>
+     */
+    #[ORM\OneToMany(targetEntity: TradeRequest::class, mappedBy: 'author')]
+    private Collection $tradeRequests;
+
+    /**
      * @var Collection<int, Message>
      */
 
@@ -70,6 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->superPowers = new ArrayCollection();
         $this->conversations = new ArrayCollection();
+        $this->tradeRequests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -268,7 +275,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Message>
+     * @return Collection<int, TradeRequest>
      */
+    public function getTradeRequests(): Collection
+    {
+        return $this->tradeRequests;
+    }
 
+    public function addTradeRequest(TradeRequest $tradeRequest): static
+    {
+        if (!$this->tradeRequests->contains($tradeRequest)) {
+            $this->tradeRequests->add($tradeRequest);
+            $tradeRequest->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTradeRequest(TradeRequest $tradeRequest): static
+    {
+        if ($this->tradeRequests->removeElement($tradeRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($tradeRequest->getAuthor() === $this) {
+                $tradeRequest->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
 }

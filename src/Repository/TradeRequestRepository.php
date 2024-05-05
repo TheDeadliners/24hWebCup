@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\Annonce;
+use App\Entity\TradeRequest;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Annonce>
+ * @extends ServiceEntityRepository<TradeRequest>
  */
-class AnnonceRepository extends ServiceEntityRepository
+class TradeRequestRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Annonce::class);
+        parent::__construct($registry, TradeRequest::class);
     }
 
     //    /**
-    //     * @return Annonce[] Returns an array of Annonce objects
+    //     * @return TradeRequest[] Returns an array of TradeRequest objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
+    //        return $this->createQueryBuilder('t')
+    //            ->andWhere('t.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('a.id', 'ASC')
+    //            ->orderBy('t.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Annonce
+    //    public function findOneBySomeField($value): ?TradeRequest
     //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
+    //        return $this->createQueryBuilder('t')
+    //            ->andWhere('t.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()

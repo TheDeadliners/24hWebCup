@@ -28,6 +28,9 @@
                     </span>
                 </div>
                 <div class="flex items-center lg:order-2">
+                    <a href="https://bff.ecoindex.fr/redirect/?url=https://lesdeadliners.lareunion.webcup.hodi.host" target="_blank">
+                        <img src="https://bff.ecoindex.fr/badge/?theme=light&url=https://lesdeadliners.lareunion.webcup.hodi.host" alt="Ecoindex Badge" />
+                    </a>
                     <span class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
                         {% if app.user.profilePicture != "" %}
                             <img class="w-8 h-8 rounded-full" src="{{ app.user.profilePicture }}" alt="Photo de profil"/>
@@ -43,15 +46,15 @@
             <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
                 <ul class="space-y-2">
                     <li>
-                        <a href="" class="{{ "" in app.current_route ? "sidebar--link--active" : "sidebar--link"}} group">
-                            <box-icon class="{{ "" in app.current_route ? "sidebar--active" : "sidebar--link--icon"}}" name='timer'></box-icon>
-                            <span class="ml-3">À la une</span>
+                        <a href="{{ path('app_trade_requests') }}" class="{{ "app_trade_requests" in app.current_route ? "sidebar--link--active" : "sidebar--link"}} group">
+                            <box-icon class="{{ "app_trade_requests" in app.current_route ? "sidebar--active" : "sidebar--link--icon"}}" name='transfer'></box-icon>
+                            <span class="ml-3">Échanges</span>
                         </a>
                     </li>
                     <li>
                         <a href="" class="{{ "app_trending" in app.current_route ? "sidebar--link--active" : "sidebar--link"}} group">
-                            <box-icon class="{{ "app_trending" in app.current_route ? "sidebar--active" : "sidebar--link--icon"}}" name='trending-up'></box-icon>
-                            <span class="ml-3">Tendances</span>
+                            <box-icon class="{{ "app_trending" in app.current_route ? "sidebar--active" : "sidebar--link--icon"}}" type="solid" name='chat'></box-icon>
+                            <span class="ml-3">Messages</span>
                         </a>
                     </li>
                 </ul>
@@ -78,6 +81,12 @@
                             <box-icon class="{{ "app_superpowers_create" in app.current_route ? "sidebar--active" : "sidebar--link--icon"}}" type="solid" name='message-square-add'></box-icon>
                             <span class="ml-3">Ajouter un pouvoir</span>
 >>>>>>> ebbb2d4ffaae6e95d38cc3e3f6265847422084e7
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_trade_requests_create') }}" class="{{ "app_trade_requests_create" in app.current_route ? "sidebar--link--active" : "sidebar--link"}} group">
+                            <box-icon class="{{ "app_trade_requests_create" in app.current_route ? "sidebar--active" : "sidebar--link--icon"}}" name='mail-send'></box-icon>
+                            <span class="ml-3">Poster un échange</span>
                         </a>
                     </li>
                 </ul>

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="px-4 mx-auto max-w-2xl">
+        <h2 class="mb-4 text-xl font-bold text-gray-900">Créer un échange</h2>
+        <form action="{{ path('app_trade_requests_save') }}" method="post">
+            <div class="grid gap-4 grid-cols-1 sm:gap-6">
+                <div>
+                    <label for="power" class="block mb-2 text-sm font-medium text-gray-900">Sélectionner le pouvoir</label>
+                    <select id="power" name="power" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                        <option selected value="">Sélectionner un type</option>
+                        {% for power in powers %}
+                            <option value="{{power.id}}">{{power.name}}</option>
+                        {% else %}
+                            <option value="">Vous n'avez plus de pouvoir disponibles à l'échange </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" name="token" value="{{ csrf_token('addTradeRequest') }}">
+            <div class="flex justify-end">
+                <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200">
+                    Créer un échange
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
