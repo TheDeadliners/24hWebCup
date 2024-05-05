@@ -76,7 +76,7 @@ class ConversationController extends AbstractController
             $message->setReceiver($conversation->getTrade()->getAuthor());
 
             $message->setContent($content);
-            $message->setDatetime(new \DateTime('now', new Timezone('Indian/Reunion'))); // Assurez-vous de définir la date et l'heure correctement
+            $message->setDatetime(new \DateTime('now', new \DateTimeZone('Indian/Reunion'))); // Assurez-vous de définir la date et l'heure correctement
 
             // Persistez le message dans la base de données
             $entityManager->persist($message);
