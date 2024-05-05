@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
          if ($this->getUser()) {
-             return $this->redirectToRoute('app_dashboard');
+             return $this->redirectToRoute('app_account');
          }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -47,7 +48,8 @@ class SecurityController extends AbstractController
             $user = new User();
             $lastName = $request->request->get('lastname');
             $firstName = $request->request->get('firstname');
-            $birthdate = $request->request->get('birthdate');
+            $birthdateString = $request->request->get('birthdate');
+            $birthdate = DateTime::createFromFormat('Y-m-d', $birthdateString);
             $email = $request->request->get('email');
             $password = $request->request->get('password');
             $hashpassword = $passwordHasher->hashPassword($user ,$password);
@@ -55,7 +57,7 @@ class SecurityController extends AbstractController
             $user->setEmail($email);
             $user->setLastName($lastName);
             $user->setFirstName($firstName);
-            $user->setFirstName($birthdate);
+            $user->setBirthdate($birthdate);
             $user->setPassword($hashpassword);
             $entityManager->persist($user);
             $entityManager->flush();

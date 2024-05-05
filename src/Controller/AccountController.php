@@ -64,7 +64,7 @@ class AccountController extends AbstractController
             }
         }
 
-        return $this->redirectToRoute('app_dashboard');
+        return $this->redirectToRoute('app_account');
     }
 
     #[Route('/ajouter-pouvoir', name: 'app_account_add_power')]

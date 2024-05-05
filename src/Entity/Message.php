@@ -27,6 +27,9 @@ class Message
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $datetime = null;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $content = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Message
     public function setDatetime(\DateTimeInterface $datetime): static
     {
         $this->datetime = $datetime;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): static
+    {
+        $this->content = $content;
 
         return $this;
     }
